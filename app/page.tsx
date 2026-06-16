@@ -57,6 +57,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             Documentation
+            Hallo
           </a>
         </div>
       </main>
