@@ -52,7 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Set: 'Set',
-  Card: 'Card'
+  Card: 'Card',
+  Game: 'Game',
+  Question: 'Question',
+  CardMark: 'CardMark'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,10 +93,64 @@ export const CardScalarFieldEnum = {
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]
 
 
+export const GameScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  currentTurn: 'currentTurn',
+  player1Token: 'player1Token',
+  player2Token: 'player2Token',
+  player1TargetCardId: 'player1TargetCardId',
+  player2TargetCardId: 'player2TargetCardId',
+  finalGuessBy: 'finalGuessBy',
+  finalGuessCardId: 'finalGuessCardId',
+  winnerRole: 'winnerRole',
+  loserRole: 'loserRole',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  setId: 'setId'
+} as const
+
+export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+
+
+export const QuestionScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  askingPlayer: 'askingPlayer',
+  answer: 'answer',
+  answeredAt: 'answeredAt',
+  createdAt: 'createdAt',
+  gameId: 'gameId'
+} as const
+
+export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
+
+
+export const CardMarkScalarFieldEnum = {
+  id: 'id',
+  playerRole: 'playerRole',
+  excluded: 'excluded',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  gameId: 'gameId',
+  cardId: 'cardId'
+} as const
+
+export type CardMarkScalarFieldEnum = (typeof CardMarkScalarFieldEnum)[keyof typeof CardMarkScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

@@ -14,14 +14,74 @@ model Set {
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  cards       Card[]   // Relation: Ein Set hat viele Karten
+  cards       Card[] // Relation: Ein Set hat viele Karten
+  games       Game[]
 }
 
 model Card {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  createdAt   DateTime @default(now())
-  set         Set      @relation(fields: [setId], references: [id])
-  setId       Int      // Fremdschluessel
+  id                   Int        @id @default(autoincrement())
+  name                 String
+  description          String
+  createdAt            DateTime   @default(now())
+  set                  Set        @relation(fields: [setId], references: [id])
+  setId                Int // Fremdschluessel
+  player1TargetInGames Game[]     @relation("Player1TargetCard")
+  player2TargetInGames Game[]     @relation("Player2TargetCard")
+  finalGuessInGames    Game[]     @relation("FinalGuessCard")
+  marks                CardMark[]
+}
+
+model Game {
+  id                  Int        @id @default(autoincrement())
+  status              String     @default("SETUP") // SETUP, PLAYING, FINISHED
+  currentTurn         String     @default("PLAYER_1") // PLAYER_1, PLAYER_2
+  player1Token        String?
+  player2Token        String?
+  player1TargetCard   Card?      @relation("Player1TargetCard", fields: [player1TargetCardId], references: [id])
+  player1TargetCardId Int?
+  player2TargetCard   Card?      @relation("Player2TargetCard", fields: [player2TargetCardId], references: [id])
+  player2TargetCardId Int?
+  finalGuessBy        String? // PLAYER_1, PLAYER_2
+  finalGuessCard      Card?      @relation("FinalGuessCard", fields: [finalGuessCardId], references: [id])
+  finalGuessCardId    Int?
+  winnerRole          String? // PLAYER_1, PLAYER_2
+  loserRole           String? // PLAYER_1, PLAYER_2
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  set                 Set        @relation(fields: [setId], references: [id])
+  setId               Int
+  questions           Question[]
+  cardMarks           CardMark[]
+
+  @@index([setId])
+  @@index([status])
+}
+
+model Question {
+  id           Int       @id @default(autoincrement())
+  text         String
+  askingPlayer String // PLAYER_1, PLAYER_2
+  answer       String? // YES, NO, UNKNOWN
+  answeredAt   DateTime?
+  createdAt    DateTime  @default(now())
+  game         Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId       Int
+
+  @@index([gameId])
+  @@index([gameId, askingPlayer])
+}
+
+model CardMark {
+  id         Int      @id @default(autoincrement())
+  playerRole String // PLAYER_1, PLAYER_2
+  excluded   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  game       Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId     Int
+  card       Card     @relation(fields: [cardId], references: [id])
+  cardId     Int
+
+  @@unique([gameId, playerRole, cardId])
+  @@index([cardId])
 }

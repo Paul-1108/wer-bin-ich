@@ -221,6 +221,10 @@ export type CardWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   setId?: Prisma.IntFilter<"Card"> | number
   set?: Prisma.XOR<Prisma.SetScalarRelationFilter, Prisma.SetWhereInput>
+  player1TargetInGames?: Prisma.GameListRelationFilter
+  player2TargetInGames?: Prisma.GameListRelationFilter
+  finalGuessInGames?: Prisma.GameListRelationFilter
+  marks?: Prisma.CardMarkListRelationFilter
 }
 
 export type CardOrderByWithRelationInput = {
@@ -230,6 +234,10 @@ export type CardOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   setId?: Prisma.SortOrder
   set?: Prisma.SetOrderByWithRelationInput
+  player1TargetInGames?: Prisma.GameOrderByRelationAggregateInput
+  player2TargetInGames?: Prisma.GameOrderByRelationAggregateInput
+  finalGuessInGames?: Prisma.GameOrderByRelationAggregateInput
+  marks?: Prisma.CardMarkOrderByRelationAggregateInput
 }
 
 export type CardWhereUniqueInput = Prisma.AtLeast<{
@@ -242,6 +250,10 @@ export type CardWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   setId?: Prisma.IntFilter<"Card"> | number
   set?: Prisma.XOR<Prisma.SetScalarRelationFilter, Prisma.SetWhereInput>
+  player1TargetInGames?: Prisma.GameListRelationFilter
+  player2TargetInGames?: Prisma.GameListRelationFilter
+  finalGuessInGames?: Prisma.GameListRelationFilter
+  marks?: Prisma.CardMarkListRelationFilter
 }, "id">
 
 export type CardOrderByWithAggregationInput = {
@@ -273,6 +285,10 @@ export type CardCreateInput = {
   description: string
   createdAt?: Date | string
   set: Prisma.SetCreateNestedOneWithoutCardsInput
+  player1TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateInput = {
@@ -281,6 +297,10 @@ export type CardUncheckedCreateInput = {
   description: string
   createdAt?: Date | string
   setId: number
+  player1TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameUncheckedCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardUpdateInput = {
@@ -288,6 +308,10 @@ export type CardUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   set?: Prisma.SetUpdateOneRequiredWithoutCardsNestedInput
+  player1TargetInGames?: Prisma.GameUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateInput = {
@@ -296,6 +320,10 @@ export type CardUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   setId?: Prisma.IntFieldUpdateOperationsInput | number
+  player1TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUncheckedUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateManyInput = {
@@ -364,6 +392,16 @@ export type CardSumOrderByAggregateInput = {
   setId?: Prisma.SortOrder
 }
 
+export type CardNullableScalarRelationFilter = {
+  is?: Prisma.CardWhereInput | null
+  isNot?: Prisma.CardWhereInput | null
+}
+
+export type CardScalarRelationFilter = {
+  is?: Prisma.CardWhereInput
+  isNot?: Prisma.CardWhereInput
+}
+
 export type CardCreateNestedManyWithoutSetInput = {
   create?: Prisma.XOR<Prisma.CardCreateWithoutSetInput, Prisma.CardUncheckedCreateWithoutSetInput> | Prisma.CardCreateWithoutSetInput[] | Prisma.CardUncheckedCreateWithoutSetInput[]
   connectOrCreate?: Prisma.CardCreateOrConnectWithoutSetInput | Prisma.CardCreateOrConnectWithoutSetInput[]
@@ -406,10 +444,76 @@ export type CardUncheckedUpdateManyWithoutSetNestedInput = {
   deleteMany?: Prisma.CardScalarWhereInput | Prisma.CardScalarWhereInput[]
 }
 
+export type CardCreateNestedOneWithoutPlayer1TargetInGamesInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutPlayer1TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer1TargetInGamesInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutPlayer1TargetInGamesInput
+  connect?: Prisma.CardWhereUniqueInput
+}
+
+export type CardCreateNestedOneWithoutPlayer2TargetInGamesInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutPlayer2TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer2TargetInGamesInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutPlayer2TargetInGamesInput
+  connect?: Prisma.CardWhereUniqueInput
+}
+
+export type CardCreateNestedOneWithoutFinalGuessInGamesInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutFinalGuessInGamesInput, Prisma.CardUncheckedCreateWithoutFinalGuessInGamesInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutFinalGuessInGamesInput
+  connect?: Prisma.CardWhereUniqueInput
+}
+
+export type CardUpdateOneWithoutPlayer1TargetInGamesNestedInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutPlayer1TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer1TargetInGamesInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutPlayer1TargetInGamesInput
+  upsert?: Prisma.CardUpsertWithoutPlayer1TargetInGamesInput
+  disconnect?: Prisma.CardWhereInput | boolean
+  delete?: Prisma.CardWhereInput | boolean
+  connect?: Prisma.CardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutPlayer1TargetInGamesInput, Prisma.CardUpdateWithoutPlayer1TargetInGamesInput>, Prisma.CardUncheckedUpdateWithoutPlayer1TargetInGamesInput>
+}
+
+export type CardUpdateOneWithoutPlayer2TargetInGamesNestedInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutPlayer2TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer2TargetInGamesInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutPlayer2TargetInGamesInput
+  upsert?: Prisma.CardUpsertWithoutPlayer2TargetInGamesInput
+  disconnect?: Prisma.CardWhereInput | boolean
+  delete?: Prisma.CardWhereInput | boolean
+  connect?: Prisma.CardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutPlayer2TargetInGamesInput, Prisma.CardUpdateWithoutPlayer2TargetInGamesInput>, Prisma.CardUncheckedUpdateWithoutPlayer2TargetInGamesInput>
+}
+
+export type CardUpdateOneWithoutFinalGuessInGamesNestedInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutFinalGuessInGamesInput, Prisma.CardUncheckedCreateWithoutFinalGuessInGamesInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutFinalGuessInGamesInput
+  upsert?: Prisma.CardUpsertWithoutFinalGuessInGamesInput
+  disconnect?: Prisma.CardWhereInput | boolean
+  delete?: Prisma.CardWhereInput | boolean
+  connect?: Prisma.CardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutFinalGuessInGamesInput, Prisma.CardUpdateWithoutFinalGuessInGamesInput>, Prisma.CardUncheckedUpdateWithoutFinalGuessInGamesInput>
+}
+
+export type CardCreateNestedOneWithoutMarksInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutMarksInput, Prisma.CardUncheckedCreateWithoutMarksInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutMarksInput
+  connect?: Prisma.CardWhereUniqueInput
+}
+
+export type CardUpdateOneRequiredWithoutMarksNestedInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutMarksInput, Prisma.CardUncheckedCreateWithoutMarksInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutMarksInput
+  upsert?: Prisma.CardUpsertWithoutMarksInput
+  connect?: Prisma.CardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutMarksInput, Prisma.CardUpdateWithoutMarksInput>, Prisma.CardUncheckedUpdateWithoutMarksInput>
+}
+
 export type CardCreateWithoutSetInput = {
   name: string
   description: string
   createdAt?: Date | string
+  player1TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutSetInput = {
@@ -417,6 +521,10 @@ export type CardUncheckedCreateWithoutSetInput = {
   name: string
   description: string
   createdAt?: Date | string
+  player1TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameUncheckedCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutSetInput = {
@@ -455,6 +563,238 @@ export type CardScalarWhereInput = {
   setId?: Prisma.IntFilter<"Card"> | number
 }
 
+export type CardCreateWithoutPlayer1TargetInGamesInput = {
+  name: string
+  description: string
+  createdAt?: Date | string
+  set: Prisma.SetCreateNestedOneWithoutCardsInput
+  player2TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkCreateNestedManyWithoutCardInput
+}
+
+export type CardUncheckedCreateWithoutPlayer1TargetInGamesInput = {
+  id?: number
+  name: string
+  description: string
+  createdAt?: Date | string
+  setId: number
+  player2TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameUncheckedCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkUncheckedCreateNestedManyWithoutCardInput
+}
+
+export type CardCreateOrConnectWithoutPlayer1TargetInGamesInput = {
+  where: Prisma.CardWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardCreateWithoutPlayer1TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer1TargetInGamesInput>
+}
+
+export type CardCreateWithoutPlayer2TargetInGamesInput = {
+  name: string
+  description: string
+  createdAt?: Date | string
+  set: Prisma.SetCreateNestedOneWithoutCardsInput
+  player1TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer1TargetCardInput
+  finalGuessInGames?: Prisma.GameCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkCreateNestedManyWithoutCardInput
+}
+
+export type CardUncheckedCreateWithoutPlayer2TargetInGamesInput = {
+  id?: number
+  name: string
+  description: string
+  createdAt?: Date | string
+  setId: number
+  player1TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer1TargetCardInput
+  finalGuessInGames?: Prisma.GameUncheckedCreateNestedManyWithoutFinalGuessCardInput
+  marks?: Prisma.CardMarkUncheckedCreateNestedManyWithoutCardInput
+}
+
+export type CardCreateOrConnectWithoutPlayer2TargetInGamesInput = {
+  where: Prisma.CardWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardCreateWithoutPlayer2TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer2TargetInGamesInput>
+}
+
+export type CardCreateWithoutFinalGuessInGamesInput = {
+  name: string
+  description: string
+  createdAt?: Date | string
+  set: Prisma.SetCreateNestedOneWithoutCardsInput
+  player1TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer2TargetCardInput
+  marks?: Prisma.CardMarkCreateNestedManyWithoutCardInput
+}
+
+export type CardUncheckedCreateWithoutFinalGuessInGamesInput = {
+  id?: number
+  name: string
+  description: string
+  createdAt?: Date | string
+  setId: number
+  player1TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer2TargetCardInput
+  marks?: Prisma.CardMarkUncheckedCreateNestedManyWithoutCardInput
+}
+
+export type CardCreateOrConnectWithoutFinalGuessInGamesInput = {
+  where: Prisma.CardWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardCreateWithoutFinalGuessInGamesInput, Prisma.CardUncheckedCreateWithoutFinalGuessInGamesInput>
+}
+
+export type CardUpsertWithoutPlayer1TargetInGamesInput = {
+  update: Prisma.XOR<Prisma.CardUpdateWithoutPlayer1TargetInGamesInput, Prisma.CardUncheckedUpdateWithoutPlayer1TargetInGamesInput>
+  create: Prisma.XOR<Prisma.CardCreateWithoutPlayer1TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer1TargetInGamesInput>
+  where?: Prisma.CardWhereInput
+}
+
+export type CardUpdateToOneWithWhereWithoutPlayer1TargetInGamesInput = {
+  where?: Prisma.CardWhereInput
+  data: Prisma.XOR<Prisma.CardUpdateWithoutPlayer1TargetInGamesInput, Prisma.CardUncheckedUpdateWithoutPlayer1TargetInGamesInput>
+}
+
+export type CardUpdateWithoutPlayer1TargetInGamesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  set?: Prisma.SetUpdateOneRequiredWithoutCardsNestedInput
+  player2TargetInGames?: Prisma.GameUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUpdateManyWithoutCardNestedInput
+}
+
+export type CardUncheckedUpdateWithoutPlayer1TargetInGamesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  setId?: Prisma.IntFieldUpdateOperationsInput | number
+  player2TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUncheckedUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUncheckedUpdateManyWithoutCardNestedInput
+}
+
+export type CardUpsertWithoutPlayer2TargetInGamesInput = {
+  update: Prisma.XOR<Prisma.CardUpdateWithoutPlayer2TargetInGamesInput, Prisma.CardUncheckedUpdateWithoutPlayer2TargetInGamesInput>
+  create: Prisma.XOR<Prisma.CardCreateWithoutPlayer2TargetInGamesInput, Prisma.CardUncheckedCreateWithoutPlayer2TargetInGamesInput>
+  where?: Prisma.CardWhereInput
+}
+
+export type CardUpdateToOneWithWhereWithoutPlayer2TargetInGamesInput = {
+  where?: Prisma.CardWhereInput
+  data: Prisma.XOR<Prisma.CardUpdateWithoutPlayer2TargetInGamesInput, Prisma.CardUncheckedUpdateWithoutPlayer2TargetInGamesInput>
+}
+
+export type CardUpdateWithoutPlayer2TargetInGamesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  set?: Prisma.SetUpdateOneRequiredWithoutCardsNestedInput
+  player1TargetInGames?: Prisma.GameUpdateManyWithoutPlayer1TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUpdateManyWithoutCardNestedInput
+}
+
+export type CardUncheckedUpdateWithoutPlayer2TargetInGamesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  setId?: Prisma.IntFieldUpdateOperationsInput | number
+  player1TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer1TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUncheckedUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUncheckedUpdateManyWithoutCardNestedInput
+}
+
+export type CardUpsertWithoutFinalGuessInGamesInput = {
+  update: Prisma.XOR<Prisma.CardUpdateWithoutFinalGuessInGamesInput, Prisma.CardUncheckedUpdateWithoutFinalGuessInGamesInput>
+  create: Prisma.XOR<Prisma.CardCreateWithoutFinalGuessInGamesInput, Prisma.CardUncheckedCreateWithoutFinalGuessInGamesInput>
+  where?: Prisma.CardWhereInput
+}
+
+export type CardUpdateToOneWithWhereWithoutFinalGuessInGamesInput = {
+  where?: Prisma.CardWhereInput
+  data: Prisma.XOR<Prisma.CardUpdateWithoutFinalGuessInGamesInput, Prisma.CardUncheckedUpdateWithoutFinalGuessInGamesInput>
+}
+
+export type CardUpdateWithoutFinalGuessInGamesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  set?: Prisma.SetUpdateOneRequiredWithoutCardsNestedInput
+  player1TargetInGames?: Prisma.GameUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUpdateManyWithoutPlayer2TargetCardNestedInput
+  marks?: Prisma.CardMarkUpdateManyWithoutCardNestedInput
+}
+
+export type CardUncheckedUpdateWithoutFinalGuessInGamesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  setId?: Prisma.IntFieldUpdateOperationsInput | number
+  player1TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer2TargetCardNestedInput
+  marks?: Prisma.CardMarkUncheckedUpdateManyWithoutCardNestedInput
+}
+
+export type CardCreateWithoutMarksInput = {
+  name: string
+  description: string
+  createdAt?: Date | string
+  set: Prisma.SetCreateNestedOneWithoutCardsInput
+  player1TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameCreateNestedManyWithoutFinalGuessCardInput
+}
+
+export type CardUncheckedCreateWithoutMarksInput = {
+  id?: number
+  name: string
+  description: string
+  createdAt?: Date | string
+  setId: number
+  player1TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer1TargetCardInput
+  player2TargetInGames?: Prisma.GameUncheckedCreateNestedManyWithoutPlayer2TargetCardInput
+  finalGuessInGames?: Prisma.GameUncheckedCreateNestedManyWithoutFinalGuessCardInput
+}
+
+export type CardCreateOrConnectWithoutMarksInput = {
+  where: Prisma.CardWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardCreateWithoutMarksInput, Prisma.CardUncheckedCreateWithoutMarksInput>
+}
+
+export type CardUpsertWithoutMarksInput = {
+  update: Prisma.XOR<Prisma.CardUpdateWithoutMarksInput, Prisma.CardUncheckedUpdateWithoutMarksInput>
+  create: Prisma.XOR<Prisma.CardCreateWithoutMarksInput, Prisma.CardUncheckedCreateWithoutMarksInput>
+  where?: Prisma.CardWhereInput
+}
+
+export type CardUpdateToOneWithWhereWithoutMarksInput = {
+  where?: Prisma.CardWhereInput
+  data: Prisma.XOR<Prisma.CardUpdateWithoutMarksInput, Prisma.CardUncheckedUpdateWithoutMarksInput>
+}
+
+export type CardUpdateWithoutMarksInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  set?: Prisma.SetUpdateOneRequiredWithoutCardsNestedInput
+  player1TargetInGames?: Prisma.GameUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUpdateManyWithoutFinalGuessCardNestedInput
+}
+
+export type CardUncheckedUpdateWithoutMarksInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  setId?: Prisma.IntFieldUpdateOperationsInput | number
+  player1TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUncheckedUpdateManyWithoutFinalGuessCardNestedInput
+}
+
 export type CardCreateManySetInput = {
   id?: number
   name: string
@@ -466,6 +806,10 @@ export type CardUpdateWithoutSetInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  player1TargetInGames?: Prisma.GameUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutSetInput = {
@@ -473,6 +817,10 @@ export type CardUncheckedUpdateWithoutSetInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  player1TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer1TargetCardNestedInput
+  player2TargetInGames?: Prisma.GameUncheckedUpdateManyWithoutPlayer2TargetCardNestedInput
+  finalGuessInGames?: Prisma.GameUncheckedUpdateManyWithoutFinalGuessCardNestedInput
+  marks?: Prisma.CardMarkUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateManyWithoutSetInput = {
@@ -483,6 +831,62 @@ export type CardUncheckedUpdateManyWithoutSetInput = {
 }
 
 
+/**
+ * Count Type CardCountOutputType
+ */
+
+export type CardCountOutputType = {
+  player1TargetInGames: number
+  player2TargetInGames: number
+  finalGuessInGames: number
+  marks: number
+}
+
+export type CardCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  player1TargetInGames?: boolean | CardCountOutputTypeCountPlayer1TargetInGamesArgs
+  player2TargetInGames?: boolean | CardCountOutputTypeCountPlayer2TargetInGamesArgs
+  finalGuessInGames?: boolean | CardCountOutputTypeCountFinalGuessInGamesArgs
+  marks?: boolean | CardCountOutputTypeCountMarksArgs
+}
+
+/**
+ * CardCountOutputType without action
+ */
+export type CardCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CardCountOutputType
+   */
+  select?: Prisma.CardCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CardCountOutputType without action
+ */
+export type CardCountOutputTypeCountPlayer1TargetInGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GameWhereInput
+}
+
+/**
+ * CardCountOutputType without action
+ */
+export type CardCountOutputTypeCountPlayer2TargetInGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GameWhereInput
+}
+
+/**
+ * CardCountOutputType without action
+ */
+export type CardCountOutputTypeCountFinalGuessInGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GameWhereInput
+}
+
+/**
+ * CardCountOutputType without action
+ */
+export type CardCountOutputTypeCountMarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CardMarkWhereInput
+}
+
 
 export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -491,6 +895,11 @@ export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   setId?: boolean
   set?: boolean | Prisma.SetDefaultArgs<ExtArgs>
+  player1TargetInGames?: boolean | Prisma.Card$player1TargetInGamesArgs<ExtArgs>
+  player2TargetInGames?: boolean | Prisma.Card$player2TargetInGamesArgs<ExtArgs>
+  finalGuessInGames?: boolean | Prisma.Card$finalGuessInGamesArgs<ExtArgs>
+  marks?: boolean | Prisma.Card$marksArgs<ExtArgs>
+  _count?: boolean | Prisma.CardCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
 export type CardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -522,6 +931,11 @@ export type CardSelectScalar = {
 export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "setId", ExtArgs["result"]["card"]>
 export type CardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   set?: boolean | Prisma.SetDefaultArgs<ExtArgs>
+  player1TargetInGames?: boolean | Prisma.Card$player1TargetInGamesArgs<ExtArgs>
+  player2TargetInGames?: boolean | Prisma.Card$player2TargetInGamesArgs<ExtArgs>
+  finalGuessInGames?: boolean | Prisma.Card$finalGuessInGamesArgs<ExtArgs>
+  marks?: boolean | Prisma.Card$marksArgs<ExtArgs>
+  _count?: boolean | Prisma.CardCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CardIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   set?: boolean | Prisma.SetDefaultArgs<ExtArgs>
@@ -534,6 +948,10 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "Card"
   objects: {
     set: Prisma.$SetPayload<ExtArgs>
+    player1TargetInGames: Prisma.$GamePayload<ExtArgs>[]
+    player2TargetInGames: Prisma.$GamePayload<ExtArgs>[]
+    finalGuessInGames: Prisma.$GamePayload<ExtArgs>[]
+    marks: Prisma.$CardMarkPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -936,6 +1354,10 @@ readonly fields: CardFieldRefs;
 export interface Prisma__CardClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   set<T extends Prisma.SetDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SetDefaultArgs<ExtArgs>>): Prisma.Prisma__SetClient<runtime.Types.Result.GetResult<Prisma.$SetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  player1TargetInGames<T extends Prisma.Card$player1TargetInGamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$player1TargetInGamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  player2TargetInGames<T extends Prisma.Card$player2TargetInGamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$player2TargetInGamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  finalGuessInGames<T extends Prisma.Card$finalGuessInGamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$finalGuessInGamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  marks<T extends Prisma.Card$marksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$marksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardMarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1366,6 +1788,102 @@ export type CardDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Cards to delete.
    */
   limit?: number
+}
+
+/**
+ * Card.player1TargetInGames
+ */
+export type Card$player1TargetInGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Game
+   */
+  select?: Prisma.GameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Game
+   */
+  omit?: Prisma.GameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameInclude<ExtArgs> | null
+  where?: Prisma.GameWhereInput
+  orderBy?: Prisma.GameOrderByWithRelationInput | Prisma.GameOrderByWithRelationInput[]
+  cursor?: Prisma.GameWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GameScalarFieldEnum | Prisma.GameScalarFieldEnum[]
+}
+
+/**
+ * Card.player2TargetInGames
+ */
+export type Card$player2TargetInGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Game
+   */
+  select?: Prisma.GameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Game
+   */
+  omit?: Prisma.GameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameInclude<ExtArgs> | null
+  where?: Prisma.GameWhereInput
+  orderBy?: Prisma.GameOrderByWithRelationInput | Prisma.GameOrderByWithRelationInput[]
+  cursor?: Prisma.GameWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GameScalarFieldEnum | Prisma.GameScalarFieldEnum[]
+}
+
+/**
+ * Card.finalGuessInGames
+ */
+export type Card$finalGuessInGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Game
+   */
+  select?: Prisma.GameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Game
+   */
+  omit?: Prisma.GameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameInclude<ExtArgs> | null
+  where?: Prisma.GameWhereInput
+  orderBy?: Prisma.GameOrderByWithRelationInput | Prisma.GameOrderByWithRelationInput[]
+  cursor?: Prisma.GameWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GameScalarFieldEnum | Prisma.GameScalarFieldEnum[]
+}
+
+/**
+ * Card.marks
+ */
+export type Card$marksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CardMark
+   */
+  select?: Prisma.CardMarkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CardMark
+   */
+  omit?: Prisma.CardMarkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CardMarkInclude<ExtArgs> | null
+  where?: Prisma.CardMarkWhereInput
+  orderBy?: Prisma.CardMarkOrderByWithRelationInput | Prisma.CardMarkOrderByWithRelationInput[]
+  cursor?: Prisma.CardMarkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CardMarkScalarFieldEnum | Prisma.CardMarkScalarFieldEnum[]
 }
 
 /**

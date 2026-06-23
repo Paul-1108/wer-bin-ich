@@ -217,6 +217,7 @@ export type SetWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Set"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Set"> | Date | string
   cards?: Prisma.CardListRelationFilter
+  games?: Prisma.GameListRelationFilter
 }
 
 export type SetOrderByWithRelationInput = {
@@ -226,6 +227,7 @@ export type SetOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   cards?: Prisma.CardOrderByRelationAggregateInput
+  games?: Prisma.GameOrderByRelationAggregateInput
 }
 
 export type SetWhereUniqueInput = Prisma.AtLeast<{
@@ -238,6 +240,7 @@ export type SetWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Set"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Set"> | Date | string
   cards?: Prisma.CardListRelationFilter
+  games?: Prisma.GameListRelationFilter
 }, "id">
 
 export type SetOrderByWithAggregationInput = {
@@ -270,6 +273,7 @@ export type SetCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   cards?: Prisma.CardCreateNestedManyWithoutSetInput
+  games?: Prisma.GameCreateNestedManyWithoutSetInput
 }
 
 export type SetUncheckedCreateInput = {
@@ -279,6 +283,7 @@ export type SetUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   cards?: Prisma.CardUncheckedCreateNestedManyWithoutSetInput
+  games?: Prisma.GameUncheckedCreateNestedManyWithoutSetInput
 }
 
 export type SetUpdateInput = {
@@ -287,6 +292,7 @@ export type SetUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cards?: Prisma.CardUpdateManyWithoutSetNestedInput
+  games?: Prisma.GameUpdateManyWithoutSetNestedInput
 }
 
 export type SetUncheckedUpdateInput = {
@@ -296,6 +302,7 @@ export type SetUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cards?: Prisma.CardUncheckedUpdateManyWithoutSetNestedInput
+  games?: Prisma.GameUncheckedUpdateManyWithoutSetNestedInput
 }
 
 export type SetCreateManyInput = {
@@ -388,11 +395,26 @@ export type SetUpdateOneRequiredWithoutCardsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SetUpdateToOneWithWhereWithoutCardsInput, Prisma.SetUpdateWithoutCardsInput>, Prisma.SetUncheckedUpdateWithoutCardsInput>
 }
 
+export type SetCreateNestedOneWithoutGamesInput = {
+  create?: Prisma.XOR<Prisma.SetCreateWithoutGamesInput, Prisma.SetUncheckedCreateWithoutGamesInput>
+  connectOrCreate?: Prisma.SetCreateOrConnectWithoutGamesInput
+  connect?: Prisma.SetWhereUniqueInput
+}
+
+export type SetUpdateOneRequiredWithoutGamesNestedInput = {
+  create?: Prisma.XOR<Prisma.SetCreateWithoutGamesInput, Prisma.SetUncheckedCreateWithoutGamesInput>
+  connectOrCreate?: Prisma.SetCreateOrConnectWithoutGamesInput
+  upsert?: Prisma.SetUpsertWithoutGamesInput
+  connect?: Prisma.SetWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SetUpdateToOneWithWhereWithoutGamesInput, Prisma.SetUpdateWithoutGamesInput>, Prisma.SetUncheckedUpdateWithoutGamesInput>
+}
+
 export type SetCreateWithoutCardsInput = {
   title: string
   description: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  games?: Prisma.GameCreateNestedManyWithoutSetInput
 }
 
 export type SetUncheckedCreateWithoutCardsInput = {
@@ -401,6 +423,7 @@ export type SetUncheckedCreateWithoutCardsInput = {
   description: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  games?: Prisma.GameUncheckedCreateNestedManyWithoutSetInput
 }
 
 export type SetCreateOrConnectWithoutCardsInput = {
@@ -424,6 +447,7 @@ export type SetUpdateWithoutCardsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  games?: Prisma.GameUpdateManyWithoutSetNestedInput
 }
 
 export type SetUncheckedUpdateWithoutCardsInput = {
@@ -432,6 +456,57 @@ export type SetUncheckedUpdateWithoutCardsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  games?: Prisma.GameUncheckedUpdateManyWithoutSetNestedInput
+}
+
+export type SetCreateWithoutGamesInput = {
+  title: string
+  description: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  cards?: Prisma.CardCreateNestedManyWithoutSetInput
+}
+
+export type SetUncheckedCreateWithoutGamesInput = {
+  id?: number
+  title: string
+  description: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  cards?: Prisma.CardUncheckedCreateNestedManyWithoutSetInput
+}
+
+export type SetCreateOrConnectWithoutGamesInput = {
+  where: Prisma.SetWhereUniqueInput
+  create: Prisma.XOR<Prisma.SetCreateWithoutGamesInput, Prisma.SetUncheckedCreateWithoutGamesInput>
+}
+
+export type SetUpsertWithoutGamesInput = {
+  update: Prisma.XOR<Prisma.SetUpdateWithoutGamesInput, Prisma.SetUncheckedUpdateWithoutGamesInput>
+  create: Prisma.XOR<Prisma.SetCreateWithoutGamesInput, Prisma.SetUncheckedCreateWithoutGamesInput>
+  where?: Prisma.SetWhereInput
+}
+
+export type SetUpdateToOneWithWhereWithoutGamesInput = {
+  where?: Prisma.SetWhereInput
+  data: Prisma.XOR<Prisma.SetUpdateWithoutGamesInput, Prisma.SetUncheckedUpdateWithoutGamesInput>
+}
+
+export type SetUpdateWithoutGamesInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cards?: Prisma.CardUpdateManyWithoutSetNestedInput
+}
+
+export type SetUncheckedUpdateWithoutGamesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cards?: Prisma.CardUncheckedUpdateManyWithoutSetNestedInput
 }
 
 
@@ -441,10 +516,12 @@ export type SetUncheckedUpdateWithoutCardsInput = {
 
 export type SetCountOutputType = {
   cards: number
+  games: number
 }
 
 export type SetCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cards?: boolean | SetCountOutputTypeCountCardsArgs
+  games?: boolean | SetCountOutputTypeCountGamesArgs
 }
 
 /**
@@ -464,6 +541,13 @@ export type SetCountOutputTypeCountCardsArgs<ExtArgs extends runtime.Types.Exten
   where?: Prisma.CardWhereInput
 }
 
+/**
+ * SetCountOutputType without action
+ */
+export type SetCountOutputTypeCountGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GameWhereInput
+}
+
 
 export type SetSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -472,6 +556,7 @@ export type SetSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   createdAt?: boolean
   updatedAt?: boolean
   cards?: boolean | Prisma.Set$cardsArgs<ExtArgs>
+  games?: boolean | Prisma.Set$gamesArgs<ExtArgs>
   _count?: boolean | Prisma.SetCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["set"]>
 
@@ -502,6 +587,7 @@ export type SetSelectScalar = {
 export type SetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["set"]>
 export type SetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cards?: boolean | Prisma.Set$cardsArgs<ExtArgs>
+  games?: boolean | Prisma.Set$gamesArgs<ExtArgs>
   _count?: boolean | Prisma.SetCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SetIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -511,6 +597,7 @@ export type $SetPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   name: "Set"
   objects: {
     cards: Prisma.$CardPayload<ExtArgs>[]
+    games: Prisma.$GamePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -913,6 +1000,7 @@ readonly fields: SetFieldRefs;
 export interface Prisma__SetClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   cards<T extends Prisma.Set$cardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Set$cardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  games<T extends Prisma.Set$gamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Set$gamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1359,6 +1447,30 @@ export type Set$cardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   take?: number
   skip?: number
   distinct?: Prisma.CardScalarFieldEnum | Prisma.CardScalarFieldEnum[]
+}
+
+/**
+ * Set.games
+ */
+export type Set$gamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Game
+   */
+  select?: Prisma.GameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Game
+   */
+  omit?: Prisma.GameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameInclude<ExtArgs> | null
+  where?: Prisma.GameWhereInput
+  orderBy?: Prisma.GameOrderByWithRelationInput | Prisma.GameOrderByWithRelationInput[]
+  cursor?: Prisma.GameWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GameScalarFieldEnum | Prisma.GameScalarFieldEnum[]
 }
 
 /**
