@@ -10,4 +10,7 @@
  */
 export type * from './models/Set'
 export type * from './models/Card'
+export type * from './models/Game'
+export type * from './models/Question'
+export type * from './models/CardMark'
 export type * from './commonInputTypes'

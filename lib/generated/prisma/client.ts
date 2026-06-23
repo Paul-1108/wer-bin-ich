@@ -51,3 +51,18 @@ export type Set = Prisma.SetModel
  * 
  */
 export type Card = Prisma.CardModel
+/**
+ * Model Game
+ * 
+ */
+export type Game = Prisma.GameModel
+/**
+ * Model Question
+ * 
+ */
+export type Question = Prisma.QuestionModel
+/**
+ * Model CardMark
+ * 
+ */
+export type CardMark = Prisma.CardMarkModel
