@@ -12,21 +12,21 @@ function createPlayerToken() {
   return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
-function writeCookie(token: string) {
+function writePlayerTokenCookie(token: string) {
   document.cookie = `${PLAYER_TOKEN_KEY}=${encodeURIComponent(token)}; path=/; max-age=${COOKIE_MAX_AGE_SECONDS}; samesite=lax`;
 }
 
-export function getStoredPlayerToken() {
+export function getOrCreatePlayerToken() {
   const existingToken = window.localStorage.getItem(PLAYER_TOKEN_KEY);
 
   if (existingToken) {
-    writeCookie(existingToken);
+    writePlayerTokenCookie(existingToken);
     return existingToken;
   }
 
   const token = createPlayerToken();
   window.localStorage.setItem(PLAYER_TOKEN_KEY, token);
-  writeCookie(token);
+  writePlayerTokenCookie(token);
 
   return token;
 }
