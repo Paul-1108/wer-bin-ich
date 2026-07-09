@@ -1,9 +1,5 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
-
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,43 +9,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { createGameAction } from "@/lib/game/actions";
-import { CreateGameSchema, getValidationErrorMessage } from "@/lib/game/schemas";
 import type { SetSummaryDTO } from "@/lib/game/types";
 
 type SetSelectionProps = {
   sets: SetSummaryDTO[];
 };
 
-export function SetSelection({ sets }: SetSelectionProps) {
-  const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
-  const [pendingSetId, setPendingSetId] = useState<number | null>(null);
-  const [isPending, startTransition] = useTransition();
+async function startGame(formData: FormData) {
+  "use server";
 
-  function handleStart(setId: number) {
-    const validation = CreateGameSchema.safeParse({ setId });
+  const setId = Number(formData.get("setId"));
+  const result = await createGameAction(setId);
 
-    if (!validation.success) {
-      setError(getValidationErrorMessage(validation));
-      return;
-    }
-
-    setError(null);
-    setPendingSetId(setId);
-
-    startTransition(async () => {
-      const result = await createGameAction(validation.data.setId);
-
-      if (!result.ok) {
-        setError(result.error);
-        setPendingSetId(null);
-        return;
-      }
-
-      router.push(`/game/${result.data.gameId}`);
-    });
+  if (!result.ok) {
+    throw new Error(result.error);
   }
 
+  redirect(`/game/${result.data.gameId}`);
+}
+
+export function SetSelection({ sets }: SetSelectionProps) {
   if (sets.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-border p-8 text-sm text-muted-foreground">
@@ -60,12 +39,6 @@ export function SetSelection({ sets }: SetSelectionProps) {
 
   return (
     <section className="flex flex-col gap-4">
-      {error && (
-        <div className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-          {error}
-        </div>
-      )}
-
       <div className="grid gap-4 md:grid-cols-3">
         {sets.map((set) => (
           <Card key={set.id} className="min-h-48" size="sm">
@@ -77,14 +50,15 @@ export function SetSelection({ sets }: SetSelectionProps) {
               <p className="text-sm leading-6 text-muted-foreground">{set.description}</p>
             </CardContent>
             <CardFooter>
-              <Button
-                className="w-full"
-                disabled={isPending}
-                onClick={() => handleStart(set.id)}
-                type="button"
-              >
-                {pendingSetId === set.id ? "Starte..." : "Spiel starten"}
-              </Button>
+              <form action={startGame} className="w-full">
+                <input name="setId" type="hidden" value={set.id} />
+                <button
+                  className="inline-flex h-9 w-full shrink-0 items-center justify-center rounded-4xl border border-transparent bg-primary bg-clip-padding px-3 text-sm font-medium text-primary-foreground whitespace-nowrap transition-all outline-none select-none hover:bg-primary/80 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 active:translate-y-px"
+                  type="submit"
+                >
+                  Spiel starten
+                </button>
+              </form>
             </CardFooter>
           </Card>
         ))}
