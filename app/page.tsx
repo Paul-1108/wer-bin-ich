@@ -1,6 +1,8 @@
 import { SetSelection } from "@/components/ui/game/SetSelection";
 import { getSetSummaries } from "@/lib/game/queries";
 
+export const revalidate = 3600;
+
 export default async function Home() {
   const sets = await getSetSummaries();
 

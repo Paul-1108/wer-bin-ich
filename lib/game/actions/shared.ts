@@ -25,6 +25,6 @@ export function shuffle<T>(items: T[]): T[] {
 }
 
 export function revalidateGame(gameId: number) {
-  revalidatePath("/");
-  revalidatePath(`/game/${gameId}`);
+  revalidatePath("/", "page");
+  revalidatePath(`/game/${gameId}`, "page");
 }

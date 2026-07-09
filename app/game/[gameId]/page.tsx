@@ -5,6 +5,8 @@ import { GameShell } from "@/components/ui/game/GameShell";
 import { getGameView } from "@/lib/game/queries";
 import { PLAYER_TOKEN_KEY } from "@/lib/game/player-token";
 
+export const dynamic = "force-dynamic";
+
 type GamePageProps = PageProps<"/game/[gameId]">;
 
 export default async function GamePage({ params }: GamePageProps) {
