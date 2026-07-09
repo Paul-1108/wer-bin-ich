@@ -1,7 +1,21 @@
+import { redirect } from "next/navigation";
+
 import { SetSelection } from "@/components/ui/game/SetSelection";
 import { getSetSummaries } from "@/lib/game/queries";
 
 export const revalidate = 3600;
+
+async function joinGameById(formData: FormData) {
+  "use server";
+
+  const gameId = Number(formData.get("gameId"));
+
+  if (!Number.isInteger(gameId) || gameId <= 0) {
+    redirect("/");
+  }
+
+  redirect(`/game/${gameId}`);
+}
 
 export default async function Home() {
   const sets = await getSetSummaries();
@@ -17,6 +31,24 @@ export default async function Home() {
             uebernehmen, alle weiteren Besucher schauen zu.
           </p>
         </header>
+
+        <form action={joinGameById} className="flex max-w-md flex-col gap-3 sm:flex-row">
+          <input
+            aria-label="Spiel-ID"
+            className="h-9 min-w-0 flex-1 rounded-4xl border border-input bg-input/30 px-3 py-1 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
+            min={1}
+            name="gameId"
+            placeholder="Spiel-ID eingeben"
+            required
+            type="number"
+          />
+          <button
+            className="inline-flex h-9 shrink-0 items-center justify-center rounded-4xl border border-transparent bg-primary bg-clip-padding px-4 text-sm font-medium text-primary-foreground whitespace-nowrap transition-all outline-none select-none hover:bg-primary/80 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 active:translate-y-px"
+            type="submit"
+          >
+            Spiel beitreten
+          </button>
+        </form>
 
         <SetSelection sets={sets} />
       </main>
